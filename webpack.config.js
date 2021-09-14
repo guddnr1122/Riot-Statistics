@@ -1,4 +1,5 @@
 const path = require('path');
+// const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
   entry: './client/index.js',
@@ -37,6 +38,12 @@ module.exports = {
       }
     ],
   },
+  // plugins:[
+  //   new HtmlWebpackPlugin({
+  //     template:'./index.html',
+  //     filename: 'index.html'
+  //   })
+  // ],
   resolve: {
     // Enable importing JS / JSX files without specifying their extension
     extensions: [".js", ".jsx"],
