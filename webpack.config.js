@@ -7,15 +7,21 @@ module.exports = {
     filename: 'bundle.js',
     publicPath: '/build'
   },
-  mode: 'development',
+  mode: process.env.NODE_ENV,
   devServer: {
     static: {
       directory: __dirname,
+    },
+    proxy: {
+      '/api': { //insert the end point to set server proxy
+        target: 'http://localhost:3000',
+        secure: false,
+      }
     }
   },
   module: {
     rules: [
-      { 
+      {
         test: /\.jsx?/,
         use: {
           loader: 'babel-loader',
@@ -30,5 +36,9 @@ module.exports = {
         use: ["style-loader", "css-loader", "sass-loader",]
       }
     ],
+  },
+  resolve: {
+    // Enable importing JS / JSX files without specifying their extension
+    extensions: [".js", ".jsx"],
   }
 };
