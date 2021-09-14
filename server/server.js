@@ -10,6 +10,6 @@ app.get('/', (req, res) => {
   return res.status(200).sendFile(path.join(__dirname, '../index.html'));
 });
 
-//
+// serve
 
 app.listen(3000);
