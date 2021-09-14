@@ -1,0 +1,29 @@
+{
+  "name": "riot-statistics",
+  "version": "1.0.0",
+  "description": "Displaying Riot's Games Statistics",
+  "main": "index.js",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.15.5",
+    "@babel/preset-env": "^7.15.6",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "css-loader": "^6.2.0",
+    "sass-loader": "^12.1.0",
+    "style-loader": "^3.2.1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/guddnr1122/Riot-Statistics.git"
+  },
+  "author": "Luke Cho",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/guddnr1122/Riot-Statistics/issues"
+  },
+  "homepage": "https://github.com/guddnr1122/Riot-Statistics#readme"
+}
