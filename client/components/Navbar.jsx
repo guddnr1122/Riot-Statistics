@@ -1,15 +1,18 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react'
 
 function LeagueNavbar(props) {
+
   return (
     <nav>
-      <a href="/champions"> Champions </a>
-      <a href="/items"> items </a>
-      <a href="/trends"> trends </a>
-      <input type='text' placeholder="Search Summoner's name"></input>
-      <button onClick={e => {}}>Search</button>
+      <button onClick={() => props.setPage('champions')}> Champions </button>
+      <button onClick={() => props.setPage('items')}> items </button>
+      <input type='text' placeholder="Search Summoner's name" onChange={(e) => props.setUser(e.target.value)}></input>
+      <button
+        onClick= {() => {if (props.user !== '') props.setPage('user')}}
+      >Search</button>
     </nav>
-  );
-};
+  )
+
+}
 
 export default LeagueNavbar;

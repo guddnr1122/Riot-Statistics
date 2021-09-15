@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react'
 
-function Items(props){
+function Home(props){
   return (
     <div>
-      items
+      Home
     </div>
   )
 };
 
-export default Items;
+export default Home;
