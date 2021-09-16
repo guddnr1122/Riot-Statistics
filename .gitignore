@@ -3,3 +3,6 @@ node_modules
 
 #.env which has the API Key
 .env
+
+#TFT file with all images and JSON
+TFT
