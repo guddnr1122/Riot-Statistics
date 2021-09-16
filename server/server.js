@@ -3,8 +3,10 @@ const app = express();
 const path = require('path');
 const GameRouter = require('./routes/GameRouter')
 
+app.use('/TFT', express.static(path.join(__dirname, '../client/components/')))
 // statically serve everything in the build folder on the route '/build'
 app.use('/build', express.static(path.join(__dirname, '../build')));
+
 
 app.use('/api/game', GameRouter);
 

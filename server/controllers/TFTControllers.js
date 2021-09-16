@@ -36,9 +36,11 @@ TFTControllers.getMatchInfo = (req, res, next) => {
       const matchDetails = [];
       const participants = [];
       const gameDurations = [];
+      const gameDates=[];
       for (let i = 0; i < responses.length; i++) {
         let usableData = responses[i].data.info.participants; //game infos in array
         participants.push(responses[i].data.metadata.participants); //puuids for all players in the game
+        gameDates.push(responses[i].data.info.game_datetime)
         //extracting the game info only for the user
         for (let j = 0; j < usableData.length; j++) {
           if (usableData[j].puuid === res.locals.puuid) {
@@ -50,6 +52,7 @@ TFTControllers.getMatchInfo = (req, res, next) => {
       res.locals.matchDetails = matchDetails; //array of objects
       res.locals.participants = participants; //array of strings
       res.locals.gameDurations = gameDurations; //array of integers
+      res.locals.gameDates = gameDates; //array of integers
       next();
     }))
     .catch(err => next(err));

@@ -14,7 +14,8 @@ router.get('/TFT/gamelist/:username',
       array.push({
         participants:res.locals.participants[i],
         matchDetail:res.locals.matchDetails[i],
-        gameDuration:res.locals.gameDurations[i] 
+        gameDuration:res.locals.gameDurations[i],
+        gameDate: res.locals.gameDates[i]
       });
     }
     return res.status(200).json(array)//sending all of them

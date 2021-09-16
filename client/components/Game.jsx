@@ -1,13 +1,24 @@
 import React, { useState, useEffect } from 'react'
-import axios from 'axios';
+import * as images from './TFT/index.js'
+
 
 function Game(props) {
+
   const participants = [];
   props.matchDetail.participants.forEach((participant, i) => {
     participants.push(<div key={i}>{participant}</div>)
   });
-
-  const gameDuration = Math.floor(props.matchDetail.gameDuration / 60);
+  const getTime = time => {
+    var minutes = Math.floor(time / 60);
+    var seconds = Math.round(time - minutes * 60);
+    return minutes.toString() + "m " + seconds.toString() + "s"
+  }
+  const getDate = date => {
+    var index = date?.indexOf(',')
+    return date?.slice(0, index)
+  }
+  const gameDuration = getTime(props.matchDetail.gameDuration);
+  const gameDate = getDate((new Date(props.matchDetail.gameDate)).toLocaleString());
   const gameDetails = props.matchDetail.matchDetail;
   const level = gameDetails.level;
   const placement = gameDetails.placement;
@@ -16,32 +27,30 @@ function Game(props) {
   const filteredTraits = [];
   const filteredUnitsInfo = [];
 
-
   traits.forEach(trait => {
     const obj = {}
     if (trait.style > 0) {
-      obj.name = trait.name;
+      obj.name = trait.name.slice(5).toLowerCase();
       obj.tier = trait.tier_current;
       obj.style = trait.style;
       filteredTraits.push(obj);
     }
   })
-
   //rarity is the cost-1
   //items are items
   //teir is the star
-
   units.forEach(unit => {
     const obj = {};
     obj.character = unit.character_id;
+    
     obj.rarity = unit.rarity + 1;
-    if(unit.items.length > 0){
+    if (unit.items.length > 0) {
       obj.items = unit.items;
+      
     }
     obj.tier = unit.tier;
     filteredUnitsInfo.push(obj);
   })
-
 
   const renderStars = level => {
     switch (level) {
@@ -76,40 +85,39 @@ function Game(props) {
     }
   }
 
-  console.log(filteredUnitsInfo)
-  console.log(filteredTraits)
-
   return (
     <div>
-      <div className="mainContainer" style={{ backgroundColor: renderBackGroundColor(placement), border: 'solid 1px black' }}>
-        <div className="metric">
-          <div>{gameDuration} m</div>
+      <div className="mainContainer" style={{ display:'flex', justifyContent:'space-between',backgroundColor: renderBackGroundColor(placement), border: 'solid 1px black' }}>
+        <div className="metric" style={{ display:'flex', padding:'20px', flexDirection:'column', alignItems:'center', justifyContent:'center'}}>
+          <div>{gameDate}</div>
+          <div>{gameDuration}</div>
           <div>{level} lvl</div>
           <div>{placement}{placement > 3 ? 'th' : placement === 3 ? 'rd' : placement === 2 ? 'nd' : 'st'} place</div>
         </div>
-
-        <div className='tft_championsList'>
+        <div style={{ display:'flex', width:'700px'}} className='tft_championsList'>
           {filteredUnitsInfo.map(unit => (
             <div className='tft_champion'>
+              <div style={{ display:'flex', flexDirection:'column',alignItems:'center'}} >
               {renderStars(unit.tier)}
-              <div className='tft_champion_image'>
-                <img src={`/TFT/champions/${unit.character}.png`} alt=''></img>
+              <img style ={{width:'75px', height:'75px'}} src={images[`${unit.character}`]} alt=''></img>
               </div>
               <div className='tft_champion_items'>
                 {unit.items?.map(item => (
-                  <img src={`/TFT/champions/${item}.png`} alt=''></img>
+                  <img src={''} alt=''></img>
                 ))}
               </div>
             </div>
           ))}
         </div>
-
-        <div className="traitsList">
-
+        <div style={{ display:'flex',alignItems:'center'}} className="traitsList">
+          {filteredTraits.map(trait => (
+            <div>
+              <img src={images[`${trait.name}`]}></img>
+            </div>
+          ))}
         </div>
-
-        <div className="participants">
-          {participants}
+        <div style={{ display:'flex', flexDirection:'column', width: '200px', alignItems:'center', justifyContent:'center'}} className="participants">
+          <a href={'/'}>{participants}</a>
         </div>
 
       </div>
