@@ -1,8 +1,7 @@
 const path = require('path');
 
-
 module.exports = {
-  entry: './client/index.js',
+  entry: ['@babel/polyfill', './client/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'bundle.js',
@@ -24,13 +23,19 @@ module.exports = {
     rules: [
       {
         test: /\.jsx?/,
+        exclude: /npm_modules/,
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', '@babel/preset-react']
+            presets: ['@babel/preset-env', '@babel/preset-react'],
           },
-        },
-        exclude: /npm_modules/
+          
+        }
+      },
+      {
+        test: /\.json$/,
+        loader: 'json-loader',
+        type: 'javascript/auto'
       },
       {
         test: /\.s[ac]ss$/,
@@ -41,5 +46,6 @@ module.exports = {
   resolve: {
     // Enable importing JS / JSX files without specifying their extension
     extensions: [".js", ".jsx"],
-  }
+  },
+  
 };

@@ -9,6 +9,7 @@ function App(props) {
   //pages
   const [page, setPage] = useState('home');
   const [user, setUser] = useState('');
+  // const [numberOfGames, setNumberOfGames] = useState(10);
 
   return (
     <div id='mainApp' >
@@ -16,7 +17,7 @@ function App(props) {
       {page === 'home' && <Home />}
       {page === 'items' && <Items />}
       {page === 'champions' && <Champions />}
-      {page === 'user' && <MainStat />}
+      {page === 'user' && <MainStat user={user} />}
     </div>
   )
 }
